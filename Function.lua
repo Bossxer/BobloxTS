@@ -11,6 +11,7 @@ DupeInventory = function()
     local Head = Client.Character:WaitForChild("Head")
     local Pos = Head.CFrame
     Head:Destroy()
+	Client.Character.Humanoid:UnequipTools()
     for _, v in next, Client.Backpack:GetChildren() do
         task.spawn(function()
             Services.ReplicatedStorage.Interaction.ClientInteracted:FireServer(v, "Drop tool", Pos)
