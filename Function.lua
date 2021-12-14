@@ -1,67 +1,33 @@
-local Services = setmetatable({}, {
-    __index = function(self, index)
-        local s = game:GetService(index)
-        if s then return s end
-    end
-})
-
-local Client = Services.Players.LocalPlayer
-
-DupeInventory = function()
-    local Head = Client.Character:WaitForChild("Head")
-    local Pos = Head.CFrame
-    Client.Character.Humanoid:UnequipTools()
-	Head:Destroy()
-    for _, v in next, Client.Backpack:GetChildren() do
-        task.spawn(function()
-            Services.ReplicatedStorage.Interaction.ClientInteracted:FireServer(v, "Drop tool", Pos)
-        end)
-    end
-    Client.CharacterAdded:Wait()
-    local hrp = Client.Character:WaitForChild("HumanoidRootPart")
-    wait(1)
-    hrp.CFrame = Pos
+local NoLag = function()
+   	workspace:FindFirstChildOfClass('Terrain').WaterWaveSize = 0
+	workspace:FindFirstChildOfClass('Terrain').WaterWaveSpeed = 0
+	workspace:FindFirstChildOfClass('Terrain').WaterReflectance = 0
+	workspace:FindFirstChildOfClass('Terrain').WaterTransparency = 0
+	game:GetService("Lighting").GlobalShadows = false
+	game:GetService("Lighting").FogEnd = 9e9
+	settings().Rendering.QualityLevel = 1
+	for i,v in pairs(game:GetDescendants()) do
+		if v:IsA("Part") or v:IsA("UnionOperation") or v:IsA("MeshPart") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
+			v.Material = "Plastic"
+			v.Reflectance = 0
+		elseif v:IsA("Decal") then
+			v.Transparency = 1
+		elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+			v.Lifetime = NumberRange.new(0)
+		elseif v:IsA("Explosion") then
+			v.BlastPressure = 1
+			v.BlastRadius = 1
+		end
+	end
+	for i,v in pairs(game:GetService("Lighting"):GetDescendants()) do
+		if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect") then
+			v.Enabled = false
+		end
+	end 
 end
 
-SaveSlot = function()
-    Services.ReplicatedStorage.LoadSaveRequests.RequestSave:InvokeServer(Client.CurrentSaveSlot.Value)
-end
-
-MaxLand = function()
-for i, v in pairs(game:GetService("Workspace").Properties:GetChildren()) do
-		if v:FindFirstChild("Owner") and v.Owner.Value == game.Players.LocalPlayer then
-			base = v
-			square = v.OriginSquare
-			end
-		end
-	function MakePlot(pos)
-		local Event = game:GetService("ReplicatedStorage").PropertyPurchasing.ClientExpandedProperty
-		Event:FireServer(base, pos)
-		end
-	spos = square.Position
-
-	MakePlot(CFrame.new(spos.X + 40, spos.Y, spos.Z))
-	MakePlot(CFrame.new(spos.X - 40, spos.Y, spos.Z))
-	MakePlot(CFrame.new(spos.X, spos.Y, spos.Z + 40))
-	MakePlot(CFrame.new(spos.X, spos.Y, spos.Z - 40))
-	MakePlot(CFrame.new(spos.X + 40, spos.Y, spos.Z + 40))
-	MakePlot(CFrame.new(spos.X + 40, spos.Y, spos.Z - 40))
-	MakePlot(CFrame.new(spos.X - 40, spos.Y, spos.Z + 40))
-	MakePlot(CFrame.new(spos.X - 40, spos.Y, spos.Z - 40))
-	MakePlot(CFrame.new(spos.X + 80, spos.Y, spos.Z))
-	MakePlot(CFrame.new(spos.X - 80, spos.Y, spos.Z))
-	MakePlot(CFrame.new(spos.X, spos.Y, spos.Z + 80))
-	MakePlot(CFrame.new(spos.X, spos.Y, spos.Z - 80))
-	MakePlot(CFrame.new(spos.X + 80, spos.Y, spos.Z + 80))
-	MakePlot(CFrame.new(spos.X + 80, spos.Y, spos.Z - 80))
-	MakePlot(CFrame.new(spos.X - 80, spos.Y, spos.Z + 80))
-	MakePlot(CFrame.new(spos.X - 80, spos.Y, spos.Z - 80))
-	MakePlot(CFrame.new(spos.X + 40, spos.Y, spos.Z + 80))
-	MakePlot(CFrame.new(spos.X - 40, spos.Y, spos.Z + 80))
-	MakePlot(CFrame.new(spos.X + 80, spos.Y, spos.Z + 40))
-	MakePlot(CFrame.new(spos.X + 80, spos.Y, spos.Z - 40))
-	MakePlot(CFrame.new(spos.X - 80, spos.Y, spos.Z + 40))
-	MakePlot(CFrame.new(spos.X - 80, spos.Y, spos.Z - 40))
-	MakePlot(CFrame.new(spos.X + 40, spos.Y, spos.Z - 80))
-	MakePlot(CFrame.new(spos.X - 40, spos.Y, spos.Z - 80))
+local AntiAfk = function()
+    for i,v in pairs(getconnections(game.Players.LocalPlayer.Idled)) do
+        v:Disable()
+    end
 end
