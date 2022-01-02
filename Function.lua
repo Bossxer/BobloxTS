@@ -3,7 +3,7 @@ local RS = game:GetService("RunService")
 local W, A, S, D
 local xVelo, yVelo
 
-local NoLag = function()
+function NoLag()
    	workspace:FindFirstChildOfClass('Terrain').WaterWaveSize = 0
 	workspace:FindFirstChildOfClass('Terrain').WaterWaveSpeed = 0
 	workspace:FindFirstChildOfClass('Terrain').WaterReflectance = 0
@@ -31,7 +31,7 @@ local NoLag = function()
 	end 
 end
 
-local AntiAfk = function()
+function AntiAfk()
 	local GC = getconnections or get_signal_cons
 	    if GC then
 		for i,v in pairs(GC(game.Players.LocalPlayer.Idled)) do
@@ -44,7 +44,7 @@ local AntiAfk = function()
 	end
 end
 
-local VWalkspeed = function(Ammount)
+function VWalkspeed(Ammount)
 while _G.EWalkspeed == true do
    local HRP = game.Players.LocalPlayer.Character.HumanoidRootPart
    local C = game.Workspace.CurrentCamera
