@@ -1,3 +1,8 @@
+local UIS = game:GetService("UserInputService")
+local RS = game:GetService("RunService")
+local W, A, S, D
+local xVelo, yVelo
+
 local NoLag = function()
    	workspace:FindFirstChildOfClass('Terrain').WaterWaveSize = 0
 	workspace:FindFirstChildOfClass('Terrain').WaterWaveSpeed = 0
