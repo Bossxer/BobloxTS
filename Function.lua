@@ -128,3 +128,6 @@ while _G.EWalkspeed == true do
    end
 end
 
+function SpeficRedeem(Code)
+    RedeemCode:InvokeServer(Codes[Code])
+end
