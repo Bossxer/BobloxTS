@@ -347,15 +347,6 @@ OthersPage.Dropdown({
     Options = OthersCase
 })
 
-OthersPage.Dropdown({
-    Text = "Codes",
-    Callback = function(CodeSelected)
-        _G.SCode = CodeSelected
-    end,
-    Options = Codes
-})
-
-
 OthersPage.Button({
     Text = "Others Buy Loop",
     Callback = function()
@@ -377,17 +368,25 @@ Callback = function()
 end
 })
 
+OthersPage.TextField({
+    Text = "Manual Type code to loop",
+    Callback = function(CodeTyped)
+        _G.SCode = CodeTyped
+    end
+})
+
+
 OthersPage.Button({
-    Text = "Spefic Codes Redeem Loop",
+    Text = "Manual Codes Redeem Loop",
     Callback = function()
 _G.SpecCodeLoop = game:GetService"RunService".RenderStepped:Connect(function()
-    SpeficRedeem(SCode)
+    SpeficRedeem(_G.SCode)
 end)
 end
 })
 
 OthersPage.Button({
-    Text = "Stop Spefic Code Redeem loop",
+    Text = "Stop Manual Code Redeem loop",
 Callback = function()
     _G.SpecCodeLoop:Disconnect()
 end
@@ -525,6 +524,11 @@ end
 })
 
 --ESP
+
+
+
+
+
 
 --Webhook
 
