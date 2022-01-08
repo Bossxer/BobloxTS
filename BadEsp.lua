@@ -35,14 +35,10 @@ for i, Client in pairs(Players:GetPlayers()) do
     end
 end
 
-local Loop = game:GetService"RunService".RenderStepped:Connect(function()
+game:GetService"RunService".RenderStepped:Connect(function()
     for i,Client in pairs(Players:GetPlayers()) do
         if (Client ~= Player) and Client.Character then
             Check()
         end
     end
 end)
-
-wait(300)
-
-_G.loop:Disconnect()
