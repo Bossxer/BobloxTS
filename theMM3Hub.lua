@@ -398,7 +398,7 @@ OthersPage.Button({
     Callback = function()
     _G.CodeLoop = game:GetService"RunService".RenderStepped:Connect(function()
     for i=1,#Codes do
-           RedeemCode:InvokeServer(Codes[i])
+           game:GetService("ReplicatedStorage").Interactions.Server.RedeemCode:InvokeServer(Codes[i])
     end
 end)
 end
@@ -564,6 +564,5 @@ local headers = {
 request = http_request or request or HttpPost or syn.request
 local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
 request(abcdef)
-
 
 
