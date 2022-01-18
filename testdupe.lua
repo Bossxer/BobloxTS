@@ -312,4 +312,4 @@ end
 
 end
 
-syn.queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()")
+syn.queue_on_teleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/Bossxer/BobloxTS/main/testdupe.lua'))()")
