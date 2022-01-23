@@ -2,6 +2,11 @@ local UIS = game:GetService("UserInputService")
 local RS = game:GetService("RunService")
 local W, A, S, D
 local xVelo, yVelo
+local mt = getrawmetatable(game)
+local oldnc = mt.__namecall
+setreadonly(mt,false)
+
+
 
 function NoLag()
    	workspace:FindFirstChildOfClass('Terrain').WaterWaveSize = 0
@@ -131,3 +136,16 @@ end
 function SpeficRedeem(Code)
     RedeemCode:InvokeServer(Codes[Code])
 end
+
+function antikick()
+	mt.__namecall = function(self,...)
+		local method = getnamecallmethod()
+		if method == "Kick" and self == LocalPlayer then 
+			return
+		end
+		return oldnc(self,...)
+	end
+end
+
+
+setreadonly(mt,true)
