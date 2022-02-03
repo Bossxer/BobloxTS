@@ -497,6 +497,7 @@ AutofarmPage.Button({
     wait(0.5)
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(500, 998.59985351562, 500)
     wait(0.25)
+    VipCheck()
     NoLag()
     AntiAfk()
 end
