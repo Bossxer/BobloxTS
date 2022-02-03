@@ -1,5 +1,6 @@
 local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
 local functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/Bossxer/BobloxTS/main/Function.lua"))()
+local functionss = loadstring(game:HttpGet("https://raw.githubusercontent.com/Bossxer/MM3Hob/main/Function.lua"))()
 local RedeemCode = game:GetService("ReplicatedStorage").Interactions.Server.RedeemCode
 local RenderStepped = game:GetService("RunService").RenderStepped
 local knifeCase = {}
@@ -506,7 +507,7 @@ AutofarmPage.Button({
     Callback = function()
 _G.AutofarmLoop = game:GetService"RunService".RenderStepped:Connect(function()
      for _,v in pairs(game:GetService("Workspace").CoinsFolder:GetChildren()) do
-        if game.Players.LocalPlayer.Stats.CoinsPickedUpInRound.Value ~= 50 then
+        if game.Players.LocalPlayer.Stats.CoinsPickedUpInRound.Value ~= _G.CoinCount then
             v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(500, 998.59985351562, 500)
         end
